@@ -11,7 +11,8 @@ import { getCurrentStaffUser } from '../lib/auth'
 import { BarChart3, CheckCircle, RefreshCw, FileText, Monitor, Brain, ChevronDown, ChevronUp, Plus } from 'lucide-react'
 import {
   getAllTeacherLeaveBalancesWithDetails,
-  updateTeacherTotalLeaves
+  updateTeacherTotalLeaves,
+  getPendingLeaveApplicationsForAdmin
 } from '../lib/leaveManagement'
 import { getTeachersOnLeaveForDate } from '../lib/leaveHelpers'
 
@@ -204,7 +205,7 @@ export function HeadDashboard() {
     setPendingLeavesLoading(true)
     setPendingLeavesError(null)
     try {
-      const { applications } = await import('../lib/leaveManagement').then(m => m.getPendingLeaveApplicationsForAdmin(1, 100))
+      const { applications } = await getPendingLeaveApplicationsForAdmin(1, 100)
       setPendingLeaves(applications)
     } catch (err: any) {
       setPendingLeavesError(err.message || 'Failed to load pending leave applications')
