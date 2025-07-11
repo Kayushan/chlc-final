@@ -1,0 +1,11 @@
+/* Base styles */
+body {
+  background-color: #fff;
+  color: #000;
+}
+
+/* Dark mode base styles */
+.dark body {
+  background-color: #111827; /* Tailwind's bg-gray-900 */
+  color: #f3f4f6;           /* Tailwind's text-gray-100 */
+}
