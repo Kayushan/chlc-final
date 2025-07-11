@@ -124,6 +124,12 @@ export default function UpcomingFeatures() {
             <h2 className="text-xl font-semibold mb-2">🛠 Platform Enhancements</h2>
             <ol className="list-decimal ml-6 space-y-2" start={12}>
               <li>
+                <b>Dark Mode Toggle</b><br />
+                <ul className="list-disc ml-6">
+                  <li>User toggle for dark/light mode for better accessibility.</li>
+                </ul>
+              </li>
+              <li>
                 <b>Offline Mode with Sync</b><br />
                 <ul className="list-disc ml-6">
                   <li>Allow teachers to access attendance or announcements offline and sync when back online.</li>

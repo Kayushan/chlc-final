@@ -34,7 +34,7 @@ export class AISystemDiagnostics {
   }
 
   async runFullDiagnostic(): Promise<SystemHealth> {
-    // console.log('🔍 Starting comprehensive AI system diagnostic...')
+    console.log('🔍 Starting comprehensive AI system diagnostic...')
     this.results = []
 
     // 1. Database Connectivity

@@ -457,9 +457,9 @@ export const createPerformanceMonitor = () => {
       const endTime = performance.now()
       return endTime - startTime
     },
-    checkpoint: () => {
+    checkpoint: (label: string) => {
       const checkpointTime = performance.now()
-      // console.log(`[AI Performance] checkpoint: ${(checkpointTime - startTime).toFixed(2)}ms`)
+      console.log(`[AI Performance] ${label}: ${(checkpointTime - startTime).toFixed(2)}ms`)
       return checkpointTime - startTime
     }
   }

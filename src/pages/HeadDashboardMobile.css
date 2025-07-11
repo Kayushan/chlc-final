@@ -1,0 +1,29 @@
+/* Hide scrollbars for nav on mobile */
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+@media (max-width: 640px) {
+  .shadow-md, .shadow-lg, .shadow-xl {
+    box-shadow: 0 2px 8px 0 rgba(80, 0, 120, 0.08), 0 1.5px 4px 0 rgba(80,0,120,0.04);
+  }
+  .rounded-xl {
+    border-radius: 1.25rem;
+  }
+  .rounded-lg {
+    border-radius: 1rem;
+  }
+  .rounded-md {
+    border-radius: 0.75rem;
+  }
+  .p-4 {
+    padding: 1.25rem;
+  }
+  .pb-20 {
+    padding-bottom: 5rem;
+  }
+}

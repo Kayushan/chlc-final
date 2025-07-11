@@ -23,7 +23,7 @@ export function CreatorLogin() {
       try {
         const response = await fetch('/api/maintenance-mode')
         const data = await response.json()
-        // console.log('Maintenance mode:', data.active)
+        console.log('Maintenance mode:', data.active)
         setMaintenanceModeActive(!!data.active)
       } catch (err) {
         console.error('Failed to fetch maintenance mode status:', err)

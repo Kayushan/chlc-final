@@ -21,7 +21,7 @@ export async function authenticateStaff(email: string, password: string) {
 
     if (authError) {
       // If Supabase auth fails, fall back to custom auth
-      // console.log('Supabase auth failed, trying custom auth...')
+      console.log('Supabase auth failed, trying custom auth...')
     } else if (authData.user) {
       // If Supabase auth succeeds, get user data from users table
       const { data: userData, error: userError } = await supabase

@@ -65,7 +65,7 @@ export const MaintenanceProvider = ({ children }: MaintenanceProviderProps) => {
           filter: 'flag_name=eq.maintenance_mode'
         },
         (payload) => {
-          // console.log('Maintenance mode changed via real-time:', payload.new);
+          console.log('Maintenance mode changed via real-time:', payload.new);
           if (payload.new && typeof (payload.new as any).is_active === 'boolean') {
             setIsMaintenanceModeActive((payload.new as any).is_active);
           }
@@ -73,7 +73,7 @@ export const MaintenanceProvider = ({ children }: MaintenanceProviderProps) => {
       )
       .subscribe((status, err) => {
         if (status === 'SUBSCRIBED') {
-          // console.log('Subscribed to maintenance_mode updates.');
+          console.log('Subscribed to maintenance_mode updates.');
         }
         if (status === 'CHANNEL_ERROR' || status === 'TIMED_OUT') {
             console.error('Real-time subscription error for maintenance_mode:', err || status);

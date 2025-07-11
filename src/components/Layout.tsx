@@ -13,6 +13,8 @@ interface LayoutProps {
 export function Layout({ children, title, isCreatorLayout = false }: LayoutProps) {
   const navigate = useNavigate()
   const [user, setUser] = React.useState<any>(null)
+  // Detect if this is the TeacherDashboard by checking the title or user role
+  const isTeacherDashboard = title === 'Teacher Dashboard' || user?.role === 'teacher';
 
   React.useEffect(() => {
     if (isCreatorLayout) {
@@ -40,7 +42,8 @@ export function Layout({ children, title, isCreatorLayout = false }: LayoutProps
   // Dark mode state and toggle
   const [darkMode, setDarkMode] = React.useState(() => {
     if (typeof window !== 'undefined') {
-      // Default to dark mode unless user explicitly set light
+      // If teacher dashboard, always light
+      if (isTeacherDashboard) return false;
       const stored = localStorage.getItem('theme');
       if (stored === 'light') return false;
       return true;
@@ -49,6 +52,11 @@ export function Layout({ children, title, isCreatorLayout = false }: LayoutProps
   });
 
   React.useEffect(() => {
+    if (isTeacherDashboard) {
+      document.documentElement.classList.remove('dark');
+      localStorage.setItem('theme', 'light');
+      return;
+    }
     if (darkMode) {
       document.documentElement.classList.add('dark');
       localStorage.setItem('theme', 'dark');
@@ -56,7 +64,7 @@ export function Layout({ children, title, isCreatorLayout = false }: LayoutProps
       document.documentElement.classList.remove('dark');
       localStorage.setItem('theme', 'light');
     }
-  }, [darkMode]);
+  }, [darkMode, isTeacherDashboard]);
 
   return (
     <div className={darkMode ? 'min-h-screen bg-gray-900 text-gray-100' : 'min-h-screen bg-gray-50'}>
@@ -79,14 +87,17 @@ export function Layout({ children, title, isCreatorLayout = false }: LayoutProps
               >
                 Upcoming Features
               </a>
-              <button
-                aria-label={darkMode ? 'Switch to light mode' : 'Switch to dark mode'}
-                onClick={() => setDarkMode(dm => !dm)}
-                className={darkMode ? 'text-xs sm:text-sm px-2 py-1 rounded bg-gray-800 text-gray-100 hover:bg-gray-700 transition-colors' : 'text-xs sm:text-sm px-2 py-1 rounded bg-gray-200 text-gray-800 hover:bg-gray-300 transition-colors'}
-                style={{ minWidth: 32 }}
-              >
-                {darkMode ? '🌙' : '☀️'}
-              </button>
+      {/* Hide dark mode toggle for Teacher Dashboard */}
+      {!isTeacherDashboard && (
+        <button
+          aria-label={darkMode ? 'Switch to light mode' : 'Switch to dark mode'}
+          onClick={() => setDarkMode(dm => !dm)}
+          className={darkMode ? 'text-xs sm:text-sm px-2 py-1 rounded bg-gray-800 text-gray-100 hover:bg-gray-700 transition-colors' : 'text-xs sm:text-sm px-2 py-1 rounded bg-gray-200 text-gray-800 hover:bg-gray-300 transition-colors'}
+          style={{ minWidth: 32 }}
+        >
+          {darkMode ? '🌙' : '☀️'}
+        </button>
+      )}
               <div className="text-right hidden sm:block">
                 <p className={darkMode ? 'text-xs sm:text-sm font-medium text-gray-100' : 'text-xs sm:text-sm font-medium text-gray-900'}>
                   {user?.name || user?.email || 'User'}
